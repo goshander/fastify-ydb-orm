@@ -1,0 +1,50 @@
+{
+  "name": "fastify-ydb-orm",
+  "description": "YDB simple ORM implementation",
+  "author": {
+    "name": "Georgy Malkov",
+    "email": "i@malkovgv.ru",
+    "url": "https://github.com/goshander/fastify-ydb-orm"
+  },
+  "homepage": "https://github.com/goshander/fastify-ydb-orm",
+  "repository": {
+    "url": "https://github.com/goshander/fastify-ydb-orm"
+  },
+  "license": "see in LICENSE",
+  "version": "2.2.0",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "test-debug": "tap --ts -O -T --node-arg=--inspect-brk --bail --jobs=1 --reporter=list --no-coverage test/**/*.spec.ts",
+    "test": "tap --ts --bail --jobs=1 --reporter=list --no-coverage test/**/*.spec.ts",
+    "test-js": "rm -rf ./dist && npm run build-test && tap --bail --jobs=1 --reporter=list --no-coverage dist/test/**/*.spec.js",
+    "test-docker": "docker compose --env-file .env.test build test && docker compose --env-file .env.test run --rm test",
+    "test-docker-js": "docker compose --env-file .env.test build test && docker compose --env-file .env.test run --rm test npm run test-js",
+    "test-docker-clean": "docker compose --env-file .env.test down -v --rmi local",
+    "build": "rm -rf ./dist && tsc index.ts --declaration --outDir dist --esModuleInterop",
+    "build-test": "rm -rf ./dist && tsc test/test.spec.ts --outDir dist --esModuleInterop"
+  },
+  "dependencies": {
+    "fastify-plugin": "^4.5.0",
+    "ydb-orm": "^2.2.0"
+  },
+  "peerDependencies": {
+    "fastify": "^4.0.0"
+  },
+  "devDependencies": {
+    "@types/tap": "^15.0.0",
+    "@typescript-eslint/eslint-plugin": "6.0.0",
+    "@typescript-eslint/parser": "6.0.0",
+    "eslint": "8.45.0",
+    "eslint-config-airbnb-base": "15.0.0",
+    "eslint-config-airbnb-typescript": "17.1.0",
+    "eslint-plugin-import": "2.27.5",
+    "eslint-plugin-node": "11.1.0",
+    "eslint-plugin-promise": "6.1.1",
+    "nanoid": "^3.3.6",
+    "tap": "^18.7.0",
+    "ts-node": "^10.9.0",
+    "tslib": "^2.6.0",
+    "typescript": "^5.1.0"
+  }
+}
